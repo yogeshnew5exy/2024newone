@@ -207,6 +207,5 @@ async def account_login(bot: Client, m: Message):
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
-# Start the Bot
-updater.start_polling()
-updater.idle()
+
+app.run()
