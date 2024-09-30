@@ -6,7 +6,7 @@ yt-dlp==2024.8.6
 ffmpeg
 aiohttp==3.9.1
 aiofiles==23.2.1
-asyncio==3.12.6
+asyncio==3.12.5
 pycurl
 humanize
 
