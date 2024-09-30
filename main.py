@@ -21,7 +21,7 @@ import sys
 import re
 import os
 
-bot = Client("bot",
+app = Client("my_bot",
              bot_token= "6318119370:AAHZRO1n-as7qs9CxGztsn78d-pwWpC2r-c",
              api_id= 27495136,
              api_hash= "4ccc4865eec4d8fde7530e71948b3424")
