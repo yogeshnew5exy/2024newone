@@ -21,25 +21,39 @@ import sys
 import re
 import os
 
-app = Client("my_bot",
-             bot_token= "7932389706:AAHbHP5wOsJUg4NaydpdnfHyJGGYiM_coR4",
-             api_id= 28670461,
-             api_hash= "567928418b74baa88b23c0d603e66907")
+API_ID = 28670461
+API_HASH = "567928418b74baa88b23c0d603e66907"
+BOT_TOKEN = "7734513444:AAEJagpQmo_hEt4hx3WSEYnIvLGU0a3bp9k"
+AUTH_USERS = 5839999461,832829921
+sudo_users = [5839999461,832829921]
+bot = Client(
+    "bot",
+    bot_token=BOT_TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH
+)
+async def exec(cmd):
+  proc = await asyncio.create_subprocess_exec(*cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE)
+  stdout, stderr = await proc.communicate()
+  print(stdout.decode())
+  return proc.returncode,stderr.decode()
 
 
-@app.on_message(filters.command(["start"]))
+@bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(f"Hello [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nPress /covid")
 
 
-@app.on_message(filters.command("stop"))
+@bot.on_message(filters.command("stop"))
 async def restart_handler(_, m):
     await m.reply_text("**STOPPED**🚦", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 
-@app.on_message(filters.command(["covid"]))
+@bot.on_message(filters.command(["covid"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text('Send TXT file for download')
     input: Message = await bot.listen(editable.chat.id)
@@ -208,4 +222,4 @@ async def account_login(bot: Client, m: Message):
         await m.reply_text(e)
     await m.reply_text("Done")
 
-app.run()
+bot.run()
